@@ -365,4 +365,4 @@ We learn't how to get unstructured JSON data from a third-party REST API, create
 # Reference
 
 You can refer the following documentation from [Cockroach labs](https://www.cockroachlabs.com) to learn more about the operator and its features.
-  - https://www.cockroachlabs.com/docs/stable/demo-json-support.html#step-1-install-prerequisites
+  - https://www.cockroachlabs.com/docs/stable/demo-json-support.html
