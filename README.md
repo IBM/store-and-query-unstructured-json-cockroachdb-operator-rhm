@@ -128,7 +128,7 @@ Follow the steps below to launch the cluster console which is also called RedHat
 
 Login to IBM Cloud Account and navigate to Dashboard
 
-![](doc/source/images/dashboard.png)
+![rhm](doc/source/images/dashboard.png)
 
 Click on Clusters and select the cluster which you have created under prerequisites. In our case, cluster name is cp-rhm-poc.
 
@@ -172,7 +172,7 @@ The cluster is up and running at this point. We need to run the entire script wh
 
 We need to create a project to be used and managed from command line. Click on Create Project and give a name as `Cockroachdb-test-project`.
 
-![cp](doc/source/images/create-project.png)
+![rhm](doc/source/images/create-project.png)
 
 
 
