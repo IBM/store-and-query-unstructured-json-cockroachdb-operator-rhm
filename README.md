@@ -172,7 +172,7 @@ The cluster is up and running at this point. We need to run the entire script wh
 
 We need to create a project to be used and managed from command line. Click on Create Project and give a name as `Cockroachdb-test-project`.
 
-![](doc/source/images/create-project.png)
+![cp](doc/source/images/create-project.png)
 
 
 
