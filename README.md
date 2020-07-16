@@ -218,15 +218,15 @@ root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
   Time: 9.580878ms
   </code></pre>
   
-  - Create a database `bank` as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>CREATE DATABASE bank;</b>
+  - Create a database `employees` as follows:
+  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>CREATE DATABASE employees;</b>
   CREATE DATABASE
 
   Time: 14.449525ms
   </code></pre>
   
-  - Give our user, `maxroach`, permission to update our database, `bank` as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>GRANT ALL ON DATABASE bank TO maxroach;</b>
+  - Give our user, `maxroach`, permission to update our database, `employees` as follows:
+  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>GRANT ALL ON DATABASE employees TO maxroach;</b>
   GRANT
   
   Time: 9.308095ms
@@ -236,9 +236,8 @@ root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
 
 - Type `\q` to quit the client console as shown:
 <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>\q</b>
-  pod "cockroach-client" deleted
-  $
-  </code></pre>
+pod "cockroach-client" deleted
+</code></pre>
 
 ### Step 3: Access the admin console on your localhost
 
@@ -258,11 +257,11 @@ Forwarding from [::1]:8080 -> 8080
 
 ![cockroach-clusteroverview](doc/source/images/cockroachclusteroverview.png)
 
-- You can click on `databases` to view the `bank` database that we created earlier as shown.
+- You can click on `databases` to view the `employees` database that we created earlier as shown.
 
 ![cockroach-databases.png](doc/source/images/cockroachdatabases.png)
 
-### Step 4: Perform CRUD Operations on CockroachDB using python runtime and Jupyter Notebook
+### Step 4: Store and Query unstructured JSON data using python runtime and Jupyter Notebook
 
 - Once we have the CockroachDB UP and running, user and database created, we can now explore the JSON support by CockroachDB in a python runtime using Jupyter Notebook.
 
@@ -316,7 +315,7 @@ root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
    user_name
   `-------------`
     cpuser
-    maxroach
+    <b>maxroach</b>
     root
   (3 rows)
 
@@ -328,32 +327,30 @@ root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
   database_name
   `-----------------`
   bank
-  bank1
   defaultdb
+  <b>employees</b>
   postgres
   system
   (5 rows)
 
   Time: 2.890031ms</code></pre>
 
-  - To view the tables present in `bank` database, run the `USE bank;` command to switch to `bank` database, and run `\d` command to view the `tables` as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>USE bank;</b>
+  - To view the tables present in `employees` database, run the `USE bank;` command to switch to `bank` database, and run `\d` command to view the `tables` as follows:
+  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>USE employees;</b>
   SET
 
   Time: 11.83841ms
 
-  root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>\d</b>
+  root@example-cockroachdb-public.cockroachdb-test:26257/employees> <b>\d</b>
   table_name
   `----------------------`
-  accounts
-  jsontbl
-  test_bank_customer
-  (3 rows)
+  <b>jsontbl</b>
+  (1 row)
 
   Time: 3.684617ms</code></pre>
 
-  - Finally to view the unstructured JSON from the table run the `SELECT * from jsontbl;` command as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>SELECT * from jsontbl;</b>
+  - Finally to view the unstructured JSON from the table run the `SELECT` command as follows:
+  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/employees> <b>SELECT * from jsontbl;</b>
   </code></pre>
 
   ![cmd-output](doc/source/images/cmdoutput.png)
