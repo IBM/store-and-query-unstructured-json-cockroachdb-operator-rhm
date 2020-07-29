@@ -120,7 +120,14 @@ Completing this tutorial should take about 30 minutes.
 
 # Steps
 
-### Step 1: Create a user and database in CockroachDB
+### Step 1: Install the CockroachDB Operator from Red Hat Marketplace on OpenShift Cluster
+
+- Steps to Deploy CockroachDB Operator from Red Hat Marketplace on a OpenShift Cluster can be found here,
+  - [Steps to Deploy CockroachDB Operator](https://github.com/IBM/rhm-operator-deployment-steps)
+
+- Once you have successfully setup CockroachDB Operator on OpenShift Cluster we can create a database.
+
+### Step 2: Create a user and database in CockroachDB
 
 - Now, let's create a `user` and a `database`.
 
@@ -170,7 +177,7 @@ root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
 pod "cockroach-client" deleted
 </code></pre>
 
-### Step 5: Access the admin console on your localhost
+### Step 3: Access the admin console on your localhost
 
 - Let us view the results of the commands we ran in the earlier steps via the `admin console`. The console can be accessed at localhost with port forwarding.
 
@@ -192,7 +199,7 @@ Forwarding from [::1]:8080 -> 8080
 
 ![cockroach-databases.png](doc/source/images/cockroachdatabases.png)
 
-### Step 6: Store and Query unstructured JSON data using python runtime and Jupyter Notebook
+### Step 4: Store and Query unstructured JSON data using python runtime and Jupyter Notebook
 
 - Once we have the CockroachDB UP and running, user and database created, we can now explore the JSON support by CockroachDB in a python runtime using Jupyter Notebook.
 
