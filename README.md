@@ -1,6 +1,8 @@
 ---
 #Front matter (metadata).
-abstract:               # REQUIRED
+abstract: "This tutorial shows you how to get unstructured JSON data from an API, store it in CockroachDB hosted on Red Hat Marketplace, and query the unstructured JSON data from the table using Python and a Jupyter notebook."
+
+excerpt:  "This tutorial shows you how to get unstructured JSON data from an API, store it in CockroachDB hosted on Red Hat Marketplace, and query the unstructured JSON data from the table using Python and a Jupyter notebook."
 
 authors:
  - name: "Manoj Jahgirdar"
@@ -12,7 +14,8 @@ authors:
  - name: "Manjula G. Hosurmath"
    email: "mhosurma@in.ibm.com"
 
-completed_date: 2020-01-20
+completed_date: 2020-09-03
+last_updated: 2020-09-03
 
 components:
 - slug: "cockroachdb"
@@ -24,63 +27,28 @@ components:
   url: "https://marketplace.redhat.com/"
   type: "component"
 
-draft: true|false       # REQUIRED
+draft: true
 
-excerpt:                # REQUIRED
+keywords: "cockroachdb, red hat marketplace"
 
-keywords:               # REQUIRED - comma separated list
+primary_tag:  "databases"
 
-last_updated:           # REQUIRED - Note: date format is YYYY-MM-DD
+related_content:
+  - type: tutorials
+    slug: get-started-using-a-cockroachdb-operator-hosted-on-red-hat-marketplace
 
-primary_tag:          # REQUIRED - Note: Choose only only one primary tag. Multiple primary tags will result in automation failure. Additional non-primary tags can be added below.
+# related_links:           # OPTIONAL - Note: zero or more related links
+#  - title:
+#    url:
+#    description:
 
-pta:                    # REQUIRED - Note: can be only one
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/primary-technology-area.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
- # - "cloud, container, and infrastructure"
-
-pwg:                    # REQUIRED - Note: can be one or many
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/portfolio-working-group.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
-# - "containers"
-
-related_content:        # OPTIONAL - Note: zero or more related content
-  - type: announcements|articles|blogs|patterns|series|tutorials|videos
-    slug:
-
-related_links:           # OPTIONAL - Note: zero or more related links
-  - title:
-    url:
-    description:
-
-runtimes:               # OPTIONAL - Note: Select runtimes from the complete set of runtimes below. Do not create new runtimes. Only use runtimes specifically in use by your content.
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/runtimes.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
- # - "asp.net 5"
-
-series:                 # OPTIONAL
- - type:
-   slug:
-
-services:               # OPTIONAL - Note: please select services from the complete set of services below. Do not create new services. Only use services specifically in use by your content.
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/services.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
-# - "blockchain"
-
-subtitle:               # REQUIRED
+title:  "Store and query unstructured JSON data from CockroachDB hosted on Red Hat Marketplace"
+subtitle: "Access JSON data with CockroachDB and OpenShift"
 
 tags:
-# Please select tags from the complete set of tags below. Do not create new tags. Only use tags specifically targeted for your content. If your content could match all tags (for example cloud, hybrid, and on-prem) then do not tag it with those tags. Less is more.
-# For a full list of options see https://github.ibm.com/IBMCode/Definitions/blob/master/tags.yml
-# Use the "slug" value found at the link above to include it in this content.
-# Example (remove the # to uncomment):
- # - "blockchain"
+ - "databases"
+ - "containers"
 
-title:                  # REQUIRED
 
 translators:             # OPTIONAL - Note: can be one or more
   - name:
@@ -90,23 +58,21 @@ type: tutorial
 
 ---
 
-# Store and query unstructured JSON data from CockroachDB hosted on Red Hat Marketplace
-
-In this tutorial, we will learn how to get unstructured JSON data from an API, store it in CockroachDB hosted on Red Hat Marketplace, and query the unstructured JSON data from the table using python runtime and Jupyter notebook.
+This tutorial shows you how to get unstructured JSON data from an API, store it in CockroachDB hosted on Red Hat Marketplace, and query the unstructured JSON data from the table using Python and Jupyter notebooks.
 
 # About CockroachDB Operator
 
-CockroachDB is a ultra resilient, distributed SQL that can easily scale-out serializable transactions for your apps and services. It is cloud-native, architected to simplify scale and also guarantee consistent transactions across multiple regions and multiple clouds. [Learn more](https://marketplace.redhat.com/en-us/products/cockroachdb-operator).
+CockroachDB is an elastic SQL database that easily scales transactions for your apps and services. Its cloud-native architecture simplifies scale and also guarantees consistent transactions across multiple regions and multiple clouds. [Learn more](https://marketplace.redhat.com/en-us/products/cockroachdb-operator).
 
 # Learning objectives
 
 When you have completed this tutorial, you will understand how to:
 
-* Install CockroachDB Operator from Red Hat Marketplace on a OpenShift Cluster
+* Install CockroachDB Operator from Red Hat Marketplace on an OpenShift Cluster
 * Create a CockroachDB cluster instance
 * Create a user and database in CockroachDB
 * Store and query unstructured JSON data from a third-party API in CockroachDB
-* Manage CockroachDB cluster from the Cluster Overview page
+* Manage the CockroachDB cluster from the Cluster Overview page
 
 # Estimated time
 
@@ -114,190 +80,198 @@ Completing this tutorial should take about 30 minutes.
 
 # Pre-requisites
 
-1. [Red Hat Marketplace Account](https://marketplace.redhat.com/en-us/registration/om).
-2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). 
-3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).
+1. [Red Hat Marketplace account](https://marketplace.redhat.com/en-us/registration/om).
+2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). <--EM: this is different than the doc we referenced in the Get Started tutorial we just did. We linked here: https://cloud.ibm.com/docs/openshift?topic=openshift-getting-started when telling readers to set up a RH cluster-->
+3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).<!--EM: this link is outdated. Is it okay to point here? And what does "OC" stand for? https://docs.openshift.com/container-platform/3.11/welcome/index.html-->
+4. Access to a Jupyter Notebook. You can [install a Jupyter Notebook from python-pip](https://jupyter.org/install) or use a tool such as [Anaconda](https://www.anaconda.com/products/individual) to open the Jupyter Notebook.
 
 # Steps
 
 ### Step 1: Install the CockroachDB Operator from Red Hat Marketplace on OpenShift Cluster
 
-- Steps to Deploy CockroachDB Operator from Red Hat Marketplace on a OpenShift Cluster can be found here,
-  - [Steps to Deploy CockroachDB Operator](https://github.com/IBM/rhm-operator-deployment-steps)
+- Follow the steps in this tutorial to deploy a CockroachDB Operator from Red Hat Marketplace on an OpenShift Cluster:
+  - [Get started using a CockroachDB Operator hosted on Red Hat Marketplace](https://developer.ibm.com/tutorials/get-started-using-a-cockroachdb-operator-hosted-on-red-hat-marketplace/)
 
-- Once you have successfully setup CockroachDB Operator on OpenShift Cluster we can create a database.
+Once you have successfully set up a CockroachDB Operator on an OpenShift Cluster you can create a database.
 
 ### Step 2: Create a user and database in CockroachDB
 
-- Now, let's create a `user` and a `database`.
+Now, let's create a `user` and a `database`.
 
-- Run the following command to spin up a CockroachDB client:
+1. Run the following command to spin up a CockroachDB client: <!--EM: Is this just from their terminal?-->
 
-```bash
-$ kubectl run -it --rm cockroach-client \
---image=cockroachdb/cockroach \
---restart=Never \
---command -- \
-./cockroach sql --insecure --host=example-cockroachdb-public.cockroachdb-test
-```
+    ```bash
+    $ kubectl run -it --rm cockroach-client \
+    --image=cockroachdb/cockroach \
+    --restart=Never \
+    --command -- \
+    ./cockroach sql --insecure --host=example-cockroachdb-public.cockroachdb-test
+    ```
 
-- This should run the CockroachDB client and take you to a `SQL Command Prompt` as shown. If you don't see a command prompt, try pressing enter.
+    This should run the CockroachDB client and take you to a `SQL Command Prompt` as shown. If you don't see a command prompt, try pressing Enter.
 
-```bash
-root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
-```
+    ```bash
+    root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
+    ```
 
-- From the CockroachDB client, run the following commands:
+1. From the CockroachDB client, run the following commands:
 
-  - Create a user `maxroach` as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>CREATE USER IF NOT EXISTS maxroach;</b>
-  CREATE USER 1
-
-  Time: 9.580878ms
-  </code></pre>
+    * Create a user `maxroach` as follows:
   
-  - Create a database `employees` as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>CREATE DATABASE employees;</b>
-  CREATE DATABASE
+    <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>CREATE USER IF NOT EXISTS maxroach;</b>
+    CREATE USER 1
 
-  Time: 14.449525ms
-  </code></pre>
+    Time: 9.580878ms
+    </code></pre>
   
-  - Give our user, `maxroach`, permission to update our database, `employees` as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>GRANT ALL ON DATABASE employees TO maxroach;</b>
-  GRANT
-  
-  Time: 9.308095ms
-  </code></pre>
-  
-- At this point we have a `user` and a `database`.
+    * Create a database `employees` as follows:
+ 
+    <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>CREATE DATABASE employees;</b>
+    CREATE DATABASE
 
-- Type `\q` to quit the client console as shown:
-<pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>\q</b>
-pod "cockroach-client" deleted
-</code></pre>
+    Time: 14.449525ms
+    </code></pre>
+  
+    * Give the user, `maxroach`, permission to update our database, `employees`, as follows:
+  
+    <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>GRANT ALL ON DATABASE employees TO maxroach;</b>
+    GRANT
+  
+    Time: 9.308095ms
+    </code></pre>
+  
+    At this point, you should have a `user` and a `database`.
+
+1. Type `\q` to quit the client console as shown:
+
+    <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>\q</b>
+    pod "cockroach-client" deleted
+    </code></pre>
 
 ### Step 3: Access the admin console on your localhost
 
-- Let us view the results of the commands we ran in the earlier steps via the `admin console`. The console can be accessed at localhost with port forwarding.
+The following steps show you how to view the results of the commands you ran in the earlier steps via the `admin console` <!--EM: is this something that the reader has to login? Is the console part of cockroachdb or RHM?-->. You can access the console at localhost with port forwarding.
 
-- Run the following command to port forward `8080`:
-```bash
-$ kubectl port-forward example-cockroachdb-0 8080
-```
+1. Run the following command to port forward `8080`:
 
-```
-Forwarding from 127.0.0.1:8080 -> 8080
-Forwarding from [::1]:8080 -> 8080
-```
+    ```bash
+    $ kubectl port-forward example-cockroachdb-0 8080
+    ```
 
-- Visit <http://localhost:8080> on your browser as shown. The page should load the cluster overview.
+    ```
+    Forwarding from 127.0.0.1:8080 -> 8080
+    Forwarding from [::1]:8080 -> 8080
+    ```
 
-![cockroach-clusteroverview](doc/source/images/cockroachclusteroverview.png)
+1. Visit <http://localhost:8080> on your browser as shown. The page should load the cluster overview.
 
-- You can click on `databases` to view the `employees` database that we created earlier as shown.
+    ![cockroach-clusteroverview](doc/source/images/cockroachclusteroverview.png)
 
-![cockroach-databases.png](doc/source/images/cockroachdatabases.png)
+1. Click on `databases` to view the `employees` database that you created earlier.
 
-### Step 4: Store and Query unstructured JSON data using python runtime and Jupyter Notebook
+    ![cockroach-databases.png](doc/source/images/cockroachdatabases.png)
 
-- Once we have the CockroachDB UP and running, user and database created, we can now explore the JSON support by CockroachDB in a python runtime using Jupyter Notebook.
+### Step 4: Store and query unstructured JSON data using Python and Jupyter Notebooks
 
-- In Terminal run the following command to port forward `26257` port from the CockroachDB database instance which we will be using in our Jupyter Notebook to establish a connection with the CockroachDB database instance.
+Once the CockroachDB is running and you created the user and database, you can now explore the JSON support for CockroachDB in a python runtime using Jupyter Notebook.
 
-```bash
-$ kubectl port-forward example-cockroachdb-0 26257
-```
+1. In your terminal, run the following command to port forward the `26257` port from the CockroachDB database instance. This port is used in your Jupyter Notebook to establish a connection with the CockroachDB database instance.
 
-```
-Forwarding from 127.0.0.1:26257 -> 26257
-Forwarding from [::1]:26257 -> 26257
-```
+    ```bash
+    $ kubectl port-forward example-cockroachdb-0 26257
+    ```
 
-- We will be working with Jupyter Notebook, you can use tools like [Anaconda](https://www.anaconda.com/products/individual) to open the Jupyter Notebook or [install Jupyter Notebook from python-pip](https://jupyter.org/install).
+    ```
+    Forwarding from 127.0.0.1:26257 -> 26257
+    Forwarding from [::1]:26257 -> 26257
+    ```
 
-- Download and open the notebook [Store-and-query-unstructured-Json-CockroachDB.ipynb](Store-and-query-unstructured-Json-CockroachDB.ipynb) in your local machine.
+1. Download and open the notebook [Store-and-query-unstructured-Json-CockroachDB.ipynb](Store-and-query-unstructured-Json-CockroachDB.ipynb) in your local machine. <!--EM: Where do they access this notebook? Is it on our public IBM GH?--> 
 
-- We will be using <http://dummy.restapiexample.com/api/v1/employees> API for the demonstration purpose.
+    We are using the <http://dummy.restapiexample.com/api/v1/employees> API for demonstration purpose.
 
-![nb-api](doc/source/images/nbapi.png)
+    ![nb-api](doc/source/images/nbapi.png)
 
-- Click on the **Cell** tab and click on **Run All** as shown.
+1. Click on the **Cell** tab and select **Run All**.
 
-![nb-run](doc/source/images/nbruncell.png)
+    ![nb-run](doc/source/images/nbruncell.png)
 
-- You can now follow the notebook instructions for more details on what is happening in each cell.
+    You can now follow the notebook instructions for more details on what is happening in each cell.
 
-- After we have execuited the notebook, we can verify the table in the ClockroachDB instance through the CockroachDB client from terminal.
+    After you have executed the notebook, verify the table in the CockroachDB instance through the CockroachDB client from terminal.
 
-- In terminal Run the following command to spin up a CockroachDB client:
+1. In your terminal, run the following command to spin up a CockroachDB client:
 
-```bash
-$ kubectl run -it --rm cockroach-client \
---image=cockroachdb/cockroach \
---restart=Never \
---command -- \
-./cockroach sql --insecure --host=example-cockroachdb-public.cockroachdb-test
-```
+    ```bash
+    $ kubectl run -it --rm cockroach-client \
+    --image=cockroachdb/cockroach \
+    --restart=Never \
+    --command -- \
+    ./cockroach sql --insecure --host=example-cockroachdb-public.cockroachdb-test
+    ```
 
-- This should run the CockroachDB client and take you to a `SQL Command Prompt` as shown. If you don't see a command prompt, try pressing enter.
+    This should run the CockroachDB client and take you to a `SQL Command Prompt` as shown. If you don't see a command prompt, try pressing Enter.
 
-```bash
-root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
-```
+    ```bash
+    root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb>
+    ```
 
-- From the CockroachDB client, run the following commands to view `user`, `database` and `table` which was created with the Jupyter Notebook:
+1. From the CockroachDB client, run the following commands to view the `user`, `database`, and `table` which the Jupyter Notebook created:
 
-  - View `users` by running the `SHOW users;` command as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>SHOW users;</b>
-   user_name
-  `-------------`
-    cpuser
-    <b>maxroach</b>
-    root
-  (3 rows)
+    * View `users` by running the `SHOW users;` command:
+  
+      <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>SHOW users;</b>
+       user_name
+      `-------------`
+        cpuser
+        <b>maxroach</b>
+        root
+        (3 rows)
 
-  Time: 3.037641ms
-  </code></pre>
+      Time: 3.037641ms
+      </code></pre>
 
-  - View `databases` by running the `SHOW databases;` command as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>SHOW databases;</b>
-  database_name
-  `-----------------`
-  bank
-  defaultdb
-  <b>employees</b>
-  postgres
-  system
-  (5 rows)
+    * View `databases` by running the `SHOW databases;` command:
+  
+      <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>SHOW databases;</b>
+      database_name
+      `-----------------`
+      bank
+      defaultdb
+      <b>employees</b>
+      postgres
+      system
+      (5 rows)
 
-  Time: 2.890031ms</code></pre>
+      Time: 2.890031ms</code></pre>
 
-  - To view the tables present in `employees` database, run the `USE bank;` command to switch to `bank` database, and run `\d` command to view the `tables` as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>USE employees;</b>
-  SET
+    * To view the tables present in the Employees database, run the `USE bank;` command to switch to `bank` database, and run `\d` command to view the `tables`:
+  
+      <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/defaultdb> <b>USE employees;</b>
+      SET
 
-  Time: 11.83841ms
+      Time: 11.83841ms
 
-  root@example-cockroachdb-public.cockroachdb-test:26257/employees> <b>\d</b>
-  table_name
-  `----------------------`
-  <b>jsontbl</b>
-  (1 row)
+      root@example-cockroachdb-public.cockroachdb-test:26257/employees> <b>\d</b>
+      table_name
+      `----------------------`
+      <b>jsontbl</b>
+      (1 row)
 
-  Time: 3.684617ms</code></pre>
+      Time: 3.684617ms</code></pre>
 
-  - Finally to view the unstructured JSON from the table run the `SELECT` command as follows:
-  <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/employees> <b>SELECT * from jsontbl;</b>
-  </code></pre>
+  1. Finally, to view the unstructured JSON from the table, run the `SELECT` command as follows:
 
-  ![cmd-output](doc/source/images/cmdoutput.png)
+    <pre><code>root@example-cockroachdb-public.cockroachdb-test:26257/employees> <b>SELECT * from jsontbl;</b>
+    </code></pre>
+
+    ![cmd-output](doc/source/images/cmdoutput.png)
 
 # Summary
 
-We learn't how to get unstructured JSON data from a third-party REST API, created a table in CockroachDB and store the unstructured JSON data into the table. We also learn't to query the unstructured data from CockroachDB table into a pandas dataframe which can be further used for data engineering and data science tasks.
+In this tutorial, we showed you how to get unstructured JSON data from a third-party REST API, created a table in CockroachDB and store the unstructured JSON data into the table. You also learned how to query the unstructured data from CockroachDB table into a pandas dataframe which can be further used for data engineering and data science tasks.
 
 # Reference
 
-You can refer the following documentation from [Cockroach labs](https://www.cockroachlabs.com) to learn more about the operator and its features.
+Refer to the following documentation from [Cockroach labs](https://www.cockroachlabs.com) to learn more about the operator and its features.
   - https://www.cockroachlabs.com/docs/stable/demo-json-support.html
