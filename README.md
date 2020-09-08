@@ -81,7 +81,7 @@ Completing this tutorial should take about 30 minutes.
 # Pre-requisites
 
 1. [Red Hat Marketplace account](https://marketplace.redhat.com/en-us/registration/om).
-2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). <--EM: this is different than the doc we referenced in the Get Started tutorial we just did. We linked here: https://cloud.ibm.com/docs/openshift?topic=openshift-getting-started when telling readers to set up a RH cluster-->
+2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/docs/openshift?topic=openshift-getting-started). 
 3. [OpenShift container & kubectl CLI](https://docs.openshift.com/container-platform/4.5/cli_reference/openshift_cli/getting-started-cli.html).
 4. Access to a Jupyter Notebook. You can [install a Jupyter Notebook from python-pip](https://jupyter.org/install) or use a tool such as [Anaconda](https://www.anaconda.com/products/individual) to open the Jupyter Notebook.
 
