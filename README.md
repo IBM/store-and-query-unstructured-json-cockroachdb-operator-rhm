@@ -82,14 +82,14 @@ Completing this tutorial should take about 30 minutes.
 
 1. [Red Hat Marketplace account](https://marketplace.redhat.com/en-us/registration/om).
 2. [Red Hat OpenShift Cluster](https://cloud.ibm.com/kubernetes/catalog/create?platformType=openshift). <--EM: this is different than the doc we referenced in the Get Started tutorial we just did. We linked here: https://cloud.ibm.com/docs/openshift?topic=openshift-getting-started when telling readers to set up a RH cluster-->
-3. [OC & kubectl CLI](https://docs.openshift.com/container-platform/3.6/cli_reference/get_started_cli.html).<!--EM: this link is outdated. Is it okay to point here? And what does "OC" stand for? https://docs.openshift.com/container-platform/3.11/welcome/index.html-->
+3. [OpenShift container & kubectl CLI](https://docs.openshift.com/container-platform/4.5/cli_reference/openshift_cli/getting-started-cli.html).
 4. Access to a Jupyter Notebook. You can [install a Jupyter Notebook from python-pip](https://jupyter.org/install) or use a tool such as [Anaconda](https://www.anaconda.com/products/individual) to open the Jupyter Notebook.
 
 # Steps
 
 ### Step 1: Install the CockroachDB Operator from Red Hat Marketplace on OpenShift Cluster
 
-- Follow the steps in this tutorial to deploy a CockroachDB Operator from Red Hat Marketplace on an OpenShift Cluster:
+Follow the steps in this tutorial to deploy a CockroachDB Operator from Red Hat Marketplace on an OpenShift Cluster:
   - [Get started using a CockroachDB Operator hosted on Red Hat Marketplace](https://developer.ibm.com/tutorials/get-started-using-a-cockroachdb-operator-hosted-on-red-hat-marketplace/)
 
 Once you have successfully set up a CockroachDB Operator on an OpenShift Cluster you can create a database.
@@ -150,7 +150,9 @@ Now, let's create a `user` and a `database`.
 
 ### Step 3: Access the admin console on your localhost
 
-The following steps show you how to view the results of the commands you ran in the earlier steps via the `admin console` <!--EM: is this something that the reader has to login? Is the console part of cockroachdb or RHM?-->. You can access the console at localhost with port forwarding.
+The following steps show you how to view the results of the commands you ran in the earlier steps via the `admin console`. You can access the console at localhost with port forwarding.
+
+> Note: You need to be logged in to your OpenShift Cluster with the OC login that you accessed in [Step 2: Connect to the OpenShift cluster in your CLI](https://developer.ibm.com/tutorials/get-started-using-a-cockroachdb-operator-hosted-on-red-hat-marketplace/#2-connect-to-the-openshift-cluster-in-your-cli).
 
 1. Run the following command to port forward `8080`:
 
@@ -186,7 +188,7 @@ Once the CockroachDB is running and you created the user and database, you can n
     Forwarding from [::1]:26257 -> 26257
     ```
 
-1. Download and open the notebook [Store-and-query-unstructured-Json-CockroachDB.ipynb](Store-and-query-unstructured-Json-CockroachDB.ipynb) in your local machine. <!--EM: Where do they access this notebook? Is it on our public IBM GH?--> 
+1. Download and open the notebook [Store-and-query-unstructured-Json-CockroachDB.ipynb](https://github.com/IBM/store-and-query-unstructured-json-cockroachdb-operator-rhm/blob/master/Store-and-query-unstructured-Json-CockroachDB.ipynb) in your local machine.
 
     We are using the <http://dummy.restapiexample.com/api/v1/employees> API for demonstration purpose.
 
